@@ -1,0 +1,5 @@
+__version__ = "0.5"
+__author__ = "Pavel Tsygankov ft. Katerina 'Kerenberry' Burdeleva"
+__email__ = "tspa77@gmail.com"
+__copyright__ = "Copyright 2018, Pavel Tsygankov, Katerina Burdeleva"
+__license__ = "MIT"
