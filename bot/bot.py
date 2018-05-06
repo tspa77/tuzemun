@@ -185,12 +185,17 @@ def main(token, poll_freq):
                      f'Может тогда просто отписаться от меня?'
         return answer
 
+    def _help():
+        answer = 'Пока не прикрутили :('
+        return answer
+
+
     commands = {
         "/currentvalue": _currentvalue,
         "/setthreshold": _setthreshold,
         "/addcurrency": _addcurrency,
         "/deletecurrency": _deletecurrency,
-        "/help": ""
+        "/help": _help
     }
 
     print(f'{time.ctime()} Run, Forrest, Run!!!')
