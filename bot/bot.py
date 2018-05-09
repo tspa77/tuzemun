@@ -158,6 +158,15 @@ def _calculate_difference_rates(btc_rate, token):
 
 def main(token, poll_freq):
 
+    def _start():
+        answer = 'Я отслеживаю измения курса биткойна по отношению к разным валютам. Вот какие команды я знаю:\n' \
+                 '/currentvalue - показ текущих значений курса\n' \
+                 '/setthreshold - установить порог срабатывания оповещения\n' \
+                 '/addcurrency - добавить валюту для остлеживания\n' \
+                 '/deletecurrency - удалить валюту из перечня отслеживаемых\n' \
+                 '/help - помощь'
+        return answer
+
     def _currentvalue():
         answer = ''
         for currency in list_of_currency:
@@ -190,11 +199,12 @@ def main(token, poll_freq):
         return answer
 
     def _help():
-        answer = 'Пока не прикрутили :('
+        answer = 'Пока не прикрутили :(\n' \
+                 'Скомандуй /start - основное там есть'
         return answer
 
-
     commands = {
+        "/start": _start,
         "/currentvalue": _currentvalue,
         "/setthreshold": _setthreshold,
         "/addcurrency": _addcurrency,
