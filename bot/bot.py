@@ -84,7 +84,7 @@ def _send_message(token, chat_id, message):
         'parse_mode': 'Markdown'
     }
     requests.post(_get_endpoint(token) + '/sendMessage', headers=HEADERS, data=json.dumps(data), proxies=proxies)
-    print(f'{time.ctime()} {message}')
+    print(f'{time.ctime()} to {chat_id}:   {message}')
 
 
 def _get_bot_updates(token, offset=None, timeout=30):
@@ -120,6 +120,7 @@ def _split_threshold(thres_dict):
 def _calculate_difference_rates(btc_rate, token):
     # print(f'{time.ctime()} run _calculate_difference_rates')
     users_from_json = _get_users_from_json(USERS_JSON)
+    need_update = False
     for key in users_from_json:
         diff_cur = {}
         if key == '125702814':
@@ -146,10 +147,13 @@ def _calculate_difference_rates(btc_rate, token):
             # update current value in json
             for cur in diff_cur:
                 users_from_json[key]['settings']['currency'][cur] = btc_rate[cur][0]
-            _write_to_json(users_from_json)
+            need_update = True
         else:
             pass
             # print(f'{time.ctime()} {key}: very small difference: {diff_cur[thres_cur]}, threshold = {thres_val}')
+
+    if need_update:
+        _write_to_json(users_from_json)
 
 
 def main(token, poll_freq):
